@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Recipe Finder</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+<!-- 🌙 DARK / LIGHT TOGGLE -->
+<button id="darkToggle" class="dark-btn">🌙</button>
+
+<!-- ================= HERO SECTION ================= -->
+<header class="hero">
+
+  <!-- OVERLAY -->
+  <div class="hero-overlay"></div>
+
+  <!-- HERO CONTENT -->
+  <div class="hero-content">
+
+    <div class="chef">👨‍🍳</div>
+
+    <h1 class="hero-title">Smart Recipe Finder</h1>
+
+    <p class="hero-subtitle">
+      Search recipes using ingredients or dish name
+    </p>
+
+    <p class="welcome-text">
+      Welcome 👋 to our kitchen | Recommended for you
+    </p>
+
+    <!-- 🔍 SEARCH -->
+    <div class="search-box">
+      <input
+        type="text"
+        id="query"
+        placeholder="Enter recipe or ingredient"
+      />
+      <button onclick="searchRecipe()">Search</button>
+    </div>
+
+    <!-- 🇮🇳 REGION FILTER -->
+    <div class="filter-box">
+      <label>
+        <input type="radio" name="region" value="all" checked />
+        All Indian
+      </label>
+
+      <label>
+        <input type="radio" name="region" value="south" />
+        🌴 South Indian
+      </label>
+
+      <label>
+        <input type="radio" name="region" value="north" />
+        🫓 North Indian
+      </label>
+    </div>
+
+    <!-- 🥦 FOOD TYPE -->
+    <div class="filter-box">
+      <label>
+        <input type="radio" name="foodType" value="all" checked />
+        All
+      </label>
+
+      <label>
+        <input type="radio" name="foodType" value="veg" />
+        🥦 Veg
+      </label>
+
+      <label>
+        <input type="radio" name="foodType" value="nonveg" />
+        🍗 Non-Veg
+      </label>
+    </div>
+
+    <!-- 🚀 ACTION BUTTONS -->
+    <div class="action-buttons">
+      <button class="fav-btn" onclick="goToFavourites()">
+        ❤️ Favourites
+      </button>
+
+      <button class="recent-btn" onclick="goToRecent()">
+        🕒 Recent
+      </button>
+
+      <button class="cal-btn" onclick="window.location.href='calories.html'">
+        🔥 Calories
+      </button>
+
+      <button class="week-btn" onclick="window.location.href='weekly.html'">
+        📊 Weekly
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= RECIPES ================= -->
+<div id="recipes" class="recipe-container"></div>
+
+<!-- ================= SCRIPTS (ORDER MATTERS) ================= -->
+
+<!-- 🌙 Theme FIRST (must load even if others fail) -->
+<script src="js/theme.js"></script>
+
+<!-- 🍽 Local Indian Recipes (ONLY declaration here) -->
+<script src="js/localIndian.js"></script>
+
+<!-- 🔍 Search Logic (USES localIndianRecipes, does NOT redeclare) -->
+<script src="js/theme.js"></script>
+
+<script src="js/search.js"></script>
+
+</body>
+</html>

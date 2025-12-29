@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe Details</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dark">
+<button id="darkToggle">🌙</button>
+
+  <!-- ⬅ BACK -->
+  <button onclick="history.back()" class="dark-btn back-btn">⬅ Back</button>
+
+  <!-- 📦 DETAILS -->
+  <div id="recipeDetails" class="details-box">
+
+    <!-- IMAGE -->
+    <div class="detail-img-wrapper">
+  <img id="recipeImg" class="detail-img" />
+</div>
+
+    <!-- TITLE -->
+    <h2 id="recipeTitle"></h2>
+
+    <!-- ⭐ RATING -->
+    <div id="ratingBox" class="stars">
+      <span onclick="rateRecipe(1)">★</span>
+      <span onclick="rateRecipe(2)">★</span>
+      <span onclick="rateRecipe(3)">★</span>
+      <span onclick="rateRecipe(4)">★</span>
+      <span onclick="rateRecipe(5)">★</span>
+    </div>
+
+    <!-- ❤️ FAVOURITE -->
+    <button class="fav-btn" onclick="addToFavourites()">❤️ Add to Favourites</button>
+
+    <!-- 🔥 CALORIES -->
+    <div class="nutrition-box">
+      <h3>🥗 Estimated Nutrition</h3>
+      <p>🔥 Calories: <b id="calories">240 kcal</b></p>
+      <button class="calorie-btn" onclick="addToCalories(240)">
+        ➕ Add to Today’s Calories
+      </button>
+    </div>
+
+    <!-- INGREDIENTS -->
+    <h3>🧺 Ingredients</h3>
+    <ul id="ingredientsList"></ul>
+
+    <!-- INSTRUCTIONS -->
+    <h3>📖 Instructions</h3>
+    <p id="instructions"></p>
+
+    <!-- ▶ VIDEO -->
+    <a id="videoLink" target="_blank" class="video-btn">
+      ▶ Watch Cooking Video
+    </a>
+
+  </div>
+
+  <!-- ================= SCRIPT ================= -->
+  <script>
+    const recipeId = localStorage.getItem("recipeId");
+
+    /* ================= LOCAL RECIPES ================= */
+    const localRecipes = {
+      local_dosa: {
+        name: "Dosa",
+        img: "https://images.pexels.com/photos/20422121/pexels-photo-20422121.jpeg",
+        ingredients: ["Rice", "Urad Dal", "Salt", "Oil"],
+        instructions: `1. Soak rice and urad dal for 5–6 hours.
+2. Grind to smooth batter and ferment overnight.
+3. Heat tawa and spread batter thin.
+4. Drizzle oil and cook until crispy.
+5. Serve hot with chutney and sambar.`,
+        video: "https://www.youtube.com/results?search_query=dosa+recipe"
+      },
+
+      local_idli: {
+        name: "Idli",
+        img: "https://images.pexels.com/photos/8312083/pexels-photo-8312083.jpeg",
+        ingredients: ["Rice", "Urad Dal", "Salt"],
+        instructions: `1. Soak rice and dal and grind batter.
+2. Ferment overnight.
+3. Pour batter into idli moulds.
+4. Steam for 10–12 minutes.
+5. Serve soft idlis with chutney.`,
+        video: "https://www.youtube.com/results?search_query=idli+recipe"
+      },
+
+      local_vada: {
+        name: "Vada",
+        img: "https://images.pexels.com/photos/20422135/pexels-photo-20422135.jpeg",
+        ingredients: ["Urad Dal", "Onion", "Green Chilli", "Oil"],
+        instructions: `1. Soak dal and grind thick batter.
+2. Add onion and chilli.
+3. Shape vadas.
+4. Deep fry until golden.
+5. Serve hot.`,
+        video: "https://www.youtube.com/results?search_query=medu+vada"
+      },
+
+      local_pongal: {
+        name: "Pongal",
+        img: "https://media.istockphoto.com/id/482366402/photo/pongal.jpg?b=1&s=612x612&w=0&k=20&c=HUWeukLvj4zqOkV-keyQbmAGljuaJDOy_JK9un4id7E=",
+        ingredients: ["Rice", "Moong Dal", "Pepper", "Ghee"],
+        instructions: `1. Cook rice and dal together.
+2. Temper with ghee, pepper and cumin.
+3. Mix well.
+4. Serve hot.`,
+        video: "https://www.youtube.com/results?search_query=pongal+recipe"
+      },
+
+      local_paneer_butter_masala: {
+        name: "Paneer Butter Masala",
+        img: "",
+        ingredients: ["Paneer", "Butter", "Tomato", "Cream", "Spices"],
+        instructions: `1. Prepare tomato gravy.
+2. Add butter and spices.
+3. Add paneer cubes.
+4. Simmer with cream.
+5. Serve with naan.`,
+        video: "https://www.youtube.com/results?search_query=paneer+butter+masala"
+      },
+
+      local_chole_bhature: {
+        name: "Chole Bhature",
+        img: "https://images.pexels.com/photos/8887058/pexels-photo-8887058.jpeg",
+        ingredients: ["Chickpeas", "Onion", "Tomato", "Flour", "Spices"],
+        instructions: `1. Cook soaked chickpeas.
+2. Prepare spicy gravy.
+3. Mix chickpeas.
+4. Fry bhature.
+5. Serve hot.`,
+        video: "https://www.youtube.com/results?search_query=chole+bhature"
+      },
+
+      local_mango_juice: {
+        name: "Mango Juice",
+        img: "https://images.pexels.com/photos/4955253/pexels-photo-4955253.jpeg",
+        ingredients: ["Mango", "Sugar", "Water"],
+        instructions: `1. Peel and chop mango.
+2. Blend with sugar and water.
+3. Serve chilled.`,
+        video: "https://www.youtube.com/results?search_query=mango+juice"
+      },
+      local_orange_juice: {
+  name: "Orange Juice",
+  img: "https://media.istockphoto.com/id/915657126/photo/orange-juice-glass-jar-shot-on-rustic-wooden-table.jpg?b=1&s=612x612&w=0&k=20&c=w2uxf8MQkSzN-wt7iH9e2pjx7OdkBN3-P8PnfTzV1ko=",
+  ingredients: [
+    "Fresh Oranges",
+    "Sugar (optional)",
+    "Ice cubes"
+  ],
+  instructions: `1. Wash and peel fresh oranges.
+2. Remove seeds carefully.
+3. Blend or squeeze the oranges to extract juice.
+4. Add sugar if required and mix well.
+5. Serve fresh with ice cubes.`,
+  video: "https://www.youtube.com/results?search_query=orange+juice+recipe"
+},
+
+    };
+
+    /* ================= COMMON FUNCTIONS ================= */
+    function rateRecipe(val) {
+      localStorage.setItem("rating_" + recipeId, val);
+      document.querySelectorAll("#ratingBox span").forEach((s,i)=>{
+        s.style.color = i < val ? "gold" : "gray";
+      });
+    }
+
+    function addToFavourites() {
+      let favs = JSON.parse(localStorage.getItem("favourites")) || [];
+      if (!favs.find(f => f.id === recipeId)) {
+        favs.push({
+          id: recipeId,
+          name: document.getElementById("recipeTitle").innerText,
+          img: document.getElementById("recipeImg").src
+        });
+        localStorage.setItem("favourites", JSON.stringify(favs));
+        alert("Added to favourites ❤️");
+      }
+    }
+
+    function addToCalories(cal) {
+  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+
+  let data = JSON.parse(localStorage.getItem("calorieData")) || {};
+
+  data[today] = (data[today] || 0) + cal;
+
+  localStorage.setItem("calorieData", JSON.stringify(data));
+
+  alert("Calories added 🔥");
+}
+
+
+    /* ================= LOAD RECIPE ================= */
+    if (recipeId.startsWith("local_")) {
+      const r = localRecipes[recipeId];
+      document.getElementById("recipeTitle").innerText = r.name;
+      document.getElementById("recipeImg").src = r.img;
+      document.getElementById("instructions").innerText = r.instructions;
+      document.getElementById("videoLink").href = r.video;
+
+      r.ingredients.forEach(i => {
+        const li = document.createElement("li");
+        li.innerText = i;
+        document.getElementById("ingredientsList").appendChild(li);
+      });
+    } else {
+      fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`)
+        .then(r => r.json())
+        .then(data => {
+          const m = data.meals[0];
+          document.getElementById("recipeTitle").innerText = m.strMeal;
+          document.getElementById("recipeImg").src = m.strMealThumb;
+          document.getElementById("instructions").innerText = m.strInstructions;
+          document.getElementById("videoLink").href = m.strYoutube;
+
+          for (let i = 1; i <= 20; i++) {
+            const ing = m[`strIngredient${i}`];
+            if (ing) {
+              const li = document.createElement("li");
+              li.innerText = ing;
+              document.getElementById("ingredientsList").appendChild(li);
+            }
+          }
+        });
+    }
+  </script>
+<script src="js/theme.js"></script>
+
+</body>
+</html>

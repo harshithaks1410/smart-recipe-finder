@@ -1,0 +1,378 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* ================= BODY ================= */
+body {
+  background: #f5f5f5;
+  color: #222;
+}
+
+/* ================= DARK MODE ================= */
+body.dark {
+  background: #121212;
+  color: #f1f1f1;
+}
+
+/* ================= DARK MODE BUTTON ================= */
+.dark-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background-image: url("https://images.pexels.com/photos/1414651/pexels-photo-1414651.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  max-width: 900px;
+  padding: 20px;
+}
+
+/* ================= TEXT ================= */
+.chef {
+  font-size: 64px;
+}
+
+.hero-title {
+  font-size: 46px;
+  margin: 10px 0;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+}
+
+.welcome-text {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #ffd180;
+}
+
+/* ================= SEARCH ================= */
+.search-box {
+  margin: 30px auto 15px;
+  display: flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 520px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+.search-box button {
+  padding: 12px 20px;
+  background: #ff7043;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ================= FILTERS ================= */
+.filter-box {
+  margin-top: 15px;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  color: white;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.action-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.fav-btn,
+.recent-btn,
+.cal-btn,
+.week-btn {
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.fav-btn { background: #ff4081; }
+.recent-btn { background: #03a9f4; }
+.cal-btn { background: #ff9800; }
+.week-btn { background: #4caf50; }
+
+/* ================= RECIPE GRID ================= */
+.recipe-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* ================= RECIPE CARD ================= */
+.recipe-card {
+  background: #fff4c2;
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+body.dark .recipe-card {
+  background: #1e1e1e;
+}
+
+/* ✅ FIXED IMAGE (HOMEPAGE) */
+.recipe-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.recipe-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.recipe-card button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #ff7043;
+  color: white;
+}
+
+/* ================= DETAILS PAGE ================= */
+.details-box {
+  max-width: 900px;
+  margin: 40px auto;
+  background: linear-gradient(180deg, #1f1f1f, #151515);
+  padding: 30px;
+  border-radius: 20px;
+  color: #f1f1f1;
+}
+
+/* ✅ FIXED IMAGE (DETAIL PAGE) */
+
+
+/* Title */
+.details-box h2 {
+  font-size: 32px;
+  color: #ffcc80;
+}
+
+/* ================= NUTRITION ================= */
+.nutrition-box {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  color: #222;
+  padding: 18px;
+  border-radius: 14px;
+  margin: 25px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calorie-btn {
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ================= INGREDIENTS & INSTRUCTIONS ================= */
+.details-box ul,
+.details-box p {
+  background: rgba(255,255,255,0.05);
+  padding: 18px;
+  border-radius: 14px;
+  margin-top: 10px;
+  line-height: 1.7;
+}
+
+/* ================= VIDEO BUTTON ================= */
+.video-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 26px;
+  background: linear-gradient(135deg,#ff4d6d,#ff758f);
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+}
+
+/* ================= BACK BUTTON ================= */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* ================= STARS ================= */
+.stars span {
+  font-size: 22px;
+  cursor: pointer;
+  color: #bbb;
+}
+
+.stars span:hover {
+  color: gold;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .nutrition-box {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+
+
+
+/* ===== DISABLE HERO BACKGROUND ON RECIPE PAGE ===== */
+
+body.recipe-page .hero {
+  display: none !important;
+}
+
+body.recipe-page {
+  background: #121212 !important;
+}
+.recipe-img {
+  width: 100%;
+  max-width: 600px;
+  height: 320px;
+  object-fit: cover;
+}
+/* ===== RECIPE IMAGE FINAL FIX ===== */
+
+.detail-img-wrapper {
+  max-width: 600px;
+  margin: 20px auto;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.detail-img {
+  width: 100%;
+  height: 260px;     /* 👈 controls image size */
+  object-fit: cover;
+  display: block;
+}
+/* ================= RECENT PAGE ================= */
+
+.recent-card {
+  max-width: 700px;
+  margin: 20px auto;
+  background: #1e1e1e;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* 🔥 THIS FIXES GIANT IMAGE */
+.recent-img {
+  width: 100%;
+  height: 180px;          /* 👈 SMALL HEIGHT */
+  object-fit: cover;      /* 👈 CROPS IMAGE */
+  display: block;
+}
+
+/* Content below image */
+.recent-content {
+  padding: 16px;
+  text-align: center;
+}
+
+.recent-content h3 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.recent-content button {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #ff7043;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+/* RECENT PAGE CARD */
+.recent-card {
+  max-width: 700px;
+  margin: 20px auto;
+  background: #1e1e1e;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.recent-img {
+  width: 100%;
+  height: 180px;       /* 👈 FIX GIANT IMAGE */
+  object-fit: cover;
+}
+
+.recent-content {
+  padding: 15px;
+  text-align: center;
+}
+
+.recent-content h3 {
+  color: #fff;
+  margin-bottom: 10px;
+}
